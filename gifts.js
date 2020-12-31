@@ -66,9 +66,9 @@ function render () {
     innerHTML += '</div>'
     if (gift.claimable) {
       if (claimedBy) {
-        innerHTML += '<div class="card-footer"><div class="btn btn-primary" onClick="unclaim(\''
+        innerHTML += '<div class="card-footer"><b>You are getting this</b><div class="btn btn-primary" onClick="unclaim(\''
         innerHTML += gift.id
-        innerHTML += '\')">I’m not going to get this anymore</div></div>'
+        innerHTML += '\')">Changed your mind?</div></div>'
       } else {
         innerHTML += '<div class="card-footer"><div class="btn btn-primary" onClick="claim(\''
         innerHTML += gift.id
