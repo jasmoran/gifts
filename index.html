@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Gift Registry</title>
+
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+    <link type="text/css" rel="stylesheet" href="./style.css">
+
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+    
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDSqeECfvIXnABQZ6iZNwKLsYe12th4Eqc",
+        authDomain: "wedding-gifts-51a89.firebaseapp.com",
+        projectId: "wedding-gifts-51a89",
+        storageBucket: "wedding-gifts-51a89.appspot.com",
+        messagingSenderId: "867217299429",
+        appId: "1:867217299429:web:f9aa4ad3559d453c9b810c",
+        measurementId: "G-Q2SJD4XXDR"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      var db = firebase.firestore();
+      var auth = firebase.auth();
+
+      var ui = new firebaseui.auth.AuthUI(auth);
+      ui.start('#firebaseui-auth-container', {
+        callbacks: {
+          signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+            render()
+            return false;
+          },
+        },
+        signInOptions: [
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          {
+            provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+            forceSameDevice: false
+          }
+        ]
+      });
+    </script>
+  </head>
+
+  <body>
+    
+    <div class="p-centered">
+      <div class="hero">
+        <div class="hero-body text-center">
+          <img src="./couple.jpg" class="couple" alt="Photo of Rachel and Jack" height="300">
+          <br />
+          <h1>Jack and Rachel’s Wedding</h1>
+          <p>Gift Ideas</p>
+        </div>
+      </div>
+
+      <div class="container grid-md">
+        <div class="columns" id="cards" style="display: none;"></div>
+        <div id="login" style="display: none;">
+          <div class="text-center">Please Sign In</div>
+          <div id="firebaseui-auth-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./gifts.js"></script>
+  </body>
+</html>
